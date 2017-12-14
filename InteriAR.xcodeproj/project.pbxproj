@@ -11,7 +11,6 @@
 		7507BC071FCDCE3700DE055C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7507BC061FCDCE3700DE055C /* ViewController.swift */; };
 		7507BC0C1FCDCE3700DE055C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7507BC0B1FCDCE3700DE055C /* Assets.xcassets */; };
 		7507BC351FCDD0F000DE055C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7507BC341FCDD0EF00DE055C /* LaunchScreen.storyboard */; };
-		750C90241FD8996C000C02FD /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 750C90231FD8996C000C02FD /* ProximaNova-Regular.otf */; };
 		750D77EE1FD7293600C21C2E /* ViewController+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750D77ED1FD7293600C21C2E /* ViewController+ARSCNViewDelegate.swift */; };
 		750D77F31FD7297000C21C2E /* ViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750D77EF1FD7297000C21C2E /* ViewController+Actions.swift */; };
 		750D77F41FD7297000C21C2E /* VirtualObjectInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750D77F01FD7297000C21C2E /* VirtualObjectInteraction.swift */; };
@@ -57,7 +56,6 @@
 		7507BC151FCDCE3700DE055C /* InteriARTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InteriARTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7507BC201FCDCE3800DE055C /* InteriARUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InteriARUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7507BC341FCDD0EF00DE055C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		750C90231FD8996C000C02FD /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Regular.otf"; path = "InteriAR/ProximaNova-Regular.otf"; sourceTree = SOURCE_ROOT; };
 		750D77ED1FD7293600C21C2E /* ViewController+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+ARSCNViewDelegate.swift"; sourceTree = "<group>"; };
 		750D77EF1FD7297000C21C2E /* ViewController+Actions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+Actions.swift"; sourceTree = "<group>"; };
 		750D77F01FD7297000C21C2E /* VirtualObjectInteraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualObjectInteraction.swift; sourceTree = "<group>"; };
@@ -106,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				7507BC011FCDCE3700DE055C /* InteriAR */,
+				75C8B4971FE2E27200B53405 /* LICENSE */,
 				7507BC001FCDCE3700DE055C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -143,7 +142,6 @@
 		7507BC331FCDCFDA00DE055C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				750C90231FD8996C000C02FD /* ProximaNova-Regular.otf */,
 				750D78061FD72AE500C21C2E /* Models.scnassets */,
 				7507BC0B1FCDCE3700DE055C /* Assets.xcassets */,
 				750D78081FD72AF800C21C2E /* Main.storyboard */,
@@ -188,6 +186,13 @@
 				750D77F71FD729A000C21C2E /* VirtualObjectLoader.swift */,
 			);
 			path = "Virtual Objects";
+			sourceTree = "<group>";
+		};
+		75C8B4971FE2E27200B53405 /* LICENSE */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LICENSE;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,7 +303,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				750D78071FD72AE500C21C2E /* Models.scnassets in Resources */,
-				750C90241FD8996C000C02FD /* ProximaNova-Regular.otf in Resources */,
 				7507BC0C1FCDCE3700DE055C /* Assets.xcassets in Resources */,
 				7507BC351FCDD0F000DE055C /* LaunchScreen.storyboard in Resources */,
 				750D780A1FD72AF900C21C2E /* Main.storyboard in Resources */,
