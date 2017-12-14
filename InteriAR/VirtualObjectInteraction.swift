@@ -1,9 +1,10 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-Coordinates movement and gesture interactions with virtual objects.
-*/
+/**
+ The code from this file was taken from Apple's tutorial:
+ Handling 3D Interaction and UI Controls in Augmented Reality
+ https://developer.apple.com/documentation/arkit/handling_3d_interaction_and_ui_controls_in_augmented_reality
+ Our additions to this file were two additional gestures,
+ scaleGesture and removeGesture
+ */
 
 import UIKit
 import ARKit
@@ -130,10 +131,6 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
             // Select a new object.
             selectedObject = tappedObject
         }
-        //else if let object = selectedObject {
-            // Teleport the object to whereever the user touched the screen.
-        //    translate(object, basedOn: touchLocation, infinitePlane: false)
-        //}
     }
     
     @objc
@@ -144,6 +141,7 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
         }
     }
     
+    // MARK: The following two gestures were implemented by us
     @objc
     func didRemoveObject(_ gesture: UILongPressGestureRecognizer) {
         guard gesture.state == .changed else { return }

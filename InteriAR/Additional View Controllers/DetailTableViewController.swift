@@ -1,10 +1,7 @@
-//
-//  DetailTableViewController.swift
-//  ARKitInteraction
-//
-//  Created by Herbert Li on 11/27/17.
-//  Copyright © 2017 Apple. All rights reserved.
-//
+/**
+ This file contains code for controlling the DetailView embedded in the
+ main Camera View, and the cells in the corresponding table
+ */
 
 import UIKit
 

@@ -1,10 +1,7 @@
-//
-//  SettingsViewController.swift
-//  InteriAR
-//
-//  Created by Ashish Ramachandran on 12/6/17.
-//  Copyright © 2017 Ashish Ramachandran. All rights reserved.
-//
+/*
+ This view controller controls the settting popup embedded in the
+ main Camera View
+ */
 
 import UIKit
 

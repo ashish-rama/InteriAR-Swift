@@ -1,9 +1,9 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-A type which loads and tracks virtual objects.
-*/
+/**
+ The code from this file was taken from Apple's tutorial:
+ Handling 3D Interaction and UI Controls in Augmented Reality
+ https://developer.apple.com/documentation/arkit/handling_3d_interaction_and_ui_controls_in_augmented_reality
+ and was not changed/modified by either of us.
+ */
 
 import Foundation
 import ARKit

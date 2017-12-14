@@ -1,8 +1,9 @@
-/*
- See LICENSE folder for this sample’s licensing information.
- 
- Abstract:
- A `SCNReferenceNode` subclass for virtual objects placed into the AR scene.
+/**
+ The code from this file was based off of Apple's tutorial:
+ Handling 3D Interaction and UI Controls in Augmented Reality
+ https://developer.apple.com/documentation/arkit/handling_3d_interaction_and_ui_controls_in_augmented_reality
+ See the inline comments for details regarding we changed/modified
+ and what was left unchanged
  */
 
 import Foundation
@@ -30,15 +31,51 @@ class VirtualObject: SCNReferenceNode {
     
     var parentObject: VirtualObject?
     
-    /// The model name derived from the `referenceURL`.
+    // The model's name is derived from the URL of the model
     var modelName: String {
-        return referenceURL.lastPathComponent.replacingOccurrences(of: ".scn", with: "")
+        return referenceURL.lastPathComponent.replacingOccurrences(of:
+            ".scn", with: "")
     }
     
-    /// Use average of recent virtual object distances to avoid rapid changes in object scale.
+    // Loads all the model objects within assets folders
+    static let availableObjects: [VirtualObject] = {
+        let modelsURL = Bundle.main.url(forResource: "Models.scnassets", withExtension: nil)!
+        
+        let fileEnumerator = FileManager().enumerator(at: modelsURL, includingPropertiesForKeys: [])!
+        
+        return fileEnumerator.flatMap { element in
+            let url = element as! URL
+            
+            guard url.pathExtension == "scn" else { return nil }
+            
+            switch (url.lastPathComponent) {
+            case "candle.scn":
+                return VirtualObject(url: url, modelDescription: "For romantic nights.", modelPrice: 16.00, modelQuantity: 0, modelURL: "https://www.amazon.com/Celestial-Lights-Bright-Battery-Operated/dp/B077VXWJSR/ref=sr_1_15?ie=UTF8&qid=1512546876&sr=8-15&keywords=candle")
+            case "chair.scn":
+                return VirtualObject(url: url, modelDescription: "A red office chair.", modelPrice: 35.00, modelQuantity: 0, modelURL: "https://www.amazon.com/Poly-Bark-Vortex-Chair-Walnut/dp/B01J7ZEIZ6/ref=sr_1_24?s=home-garden&ie=UTF8&qid=1512546907&sr=1-24&keywords=red+chair")
+            case "cup.scn":
+                return VirtualObject(url: url, modelDescription: "A cup of java.", modelPrice: 5.00, modelQuantity: 0, modelURL: "https://www.amazon.com/Coffee-Large-sized-Ceramic-Restaurant-Bruntmor/dp/B072FTVD1G/ref=sr_1_7?s=home-garden&ie=UTF8&qid=1512546944&sr=1-7&keywords=coffee+mug")
+            case "lamp.scn":
+                return VirtualObject(url: url, modelDescription: "A new chic lamp.", modelPrice: 200.00, modelQuantity: 0, modelURL: "https://www.amazon.com/Possini-Euro-Cherry-Finish-Surveyor/dp/B008KZY3DW/ref=sr_1_2_sspa?s=home-garden&ie=UTF8&qid=1512546979&sr=1-2-spons&keywords=lamp&psc=1")
+            case "vase.scn":
+                return VirtualObject(url: url, modelDescription: "Priceless vase.", modelPrice: 40.00, modelQuantity: 0, modelURL: "https://www.amazon.com/28-Cylinder-Bamboo-Floor-Vase/dp/B000CS1KI6/ref=sr_1_14?s=home-garden&ie=UTF8&qid=1512547022&sr=1-14&keywords=red+vase")
+            default:
+                return VirtualObject(url: url, modelDescription: "something", modelPrice: 2.00, modelQuantity: 0, modelURL: "")
+            }
+            
+        }
+    }()
+    
+    /**
+     MARK:
+     The rest of this file was left unchanged from the
+     original tutorial
+     */
+    
+    // Use average of recent virtual object distances to avoid rapid changes in object scale.
     private var recentVirtualObjectDistances = [Float]()
     
-    /// Resets the objects poisition smoothing.
+    // Resets the objects poisition smoothing.
     func reset() {
         recentVirtualObjectDistances.removeAll()
     }
@@ -113,39 +150,6 @@ class VirtualObject: SCNReferenceNode {
             SCNTransaction.commit()
         }
     }
-}
-
-extension VirtualObject {
-    // MARK: Static Properties and Methods
-    
-    /// Loads all the model objects within `Models.scnassets`.
-    static let availableObjects: [VirtualObject] = {
-        let modelsURL = Bundle.main.url(forResource: "Models.scnassets", withExtension: nil)!
-        
-        let fileEnumerator = FileManager().enumerator(at: modelsURL, includingPropertiesForKeys: [])!
-        
-        return fileEnumerator.flatMap { element in
-            let url = element as! URL
-            
-            guard url.pathExtension == "scn" else { return nil }
-            
-            switch (url.lastPathComponent) {
-            case "candle.scn":
-                return VirtualObject(url: url, modelDescription: "For romantic nights.", modelPrice: 16.00, modelQuantity: 0, modelURL: "https://www.amazon.com/Celestial-Lights-Bright-Battery-Operated/dp/B077VXWJSR/ref=sr_1_15?ie=UTF8&qid=1512546876&sr=8-15&keywords=candle")
-            case "chair.scn":
-                return VirtualObject(url: url, modelDescription: "A red office chair.", modelPrice: 35.00, modelQuantity: 0, modelURL: "https://www.amazon.com/Poly-Bark-Vortex-Chair-Walnut/dp/B01J7ZEIZ6/ref=sr_1_24?s=home-garden&ie=UTF8&qid=1512546907&sr=1-24&keywords=red+chair")
-            case "cup.scn":
-                return VirtualObject(url: url, modelDescription: "A cup of java.", modelPrice: 5.00, modelQuantity: 0, modelURL: "https://www.amazon.com/Coffee-Large-sized-Ceramic-Restaurant-Bruntmor/dp/B072FTVD1G/ref=sr_1_7?s=home-garden&ie=UTF8&qid=1512546944&sr=1-7&keywords=coffee+mug")
-            case "lamp.scn":
-                return VirtualObject(url: url, modelDescription: "A new chic lamp.", modelPrice: 200.00, modelQuantity: 0, modelURL: "https://www.amazon.com/Possini-Euro-Cherry-Finish-Surveyor/dp/B008KZY3DW/ref=sr_1_2_sspa?s=home-garden&ie=UTF8&qid=1512546979&sr=1-2-spons&keywords=lamp&psc=1")
-            case "vase.scn":
-                return VirtualObject(url: url, modelDescription: "Priceless vase.", modelPrice: 40.00, modelQuantity: 0, modelURL: "https://www.amazon.com/28-Cylinder-Bamboo-Floor-Vase/dp/B000CS1KI6/ref=sr_1_14?s=home-garden&ie=UTF8&qid=1512547022&sr=1-14&keywords=red+vase")
-            default:
-                return VirtualObject(url: url, modelDescription: "something", modelPrice: 2.00, modelQuantity: 0, modelURL: "")
-            }
-            
-        }
-    }()
     
     /// Returns a `VirtualObject` if one exists as an ancestor to the provided node.
     static func existingObjectContainingNode(_ node: SCNNode) -> VirtualObject? {

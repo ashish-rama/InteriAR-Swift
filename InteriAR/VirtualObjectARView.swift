@@ -1,8 +1,8 @@
-/*
- See LICENSE folder for this sample’s licensing information.
- 
- Abstract:
- A custom `ARSCNView` configured for the requirements of this project.
+/**
+ The code from this file was taken from Apple's tutorial:
+ Handling 3D Interaction and UI Controls in Augmented Reality
+ https://developer.apple.com/documentation/arkit/handling_3d_interaction_and_ui_controls_in_augmented_reality
+ and was not changed/modified by either of us.
  */
 
 import Foundation

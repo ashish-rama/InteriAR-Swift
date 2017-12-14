@@ -1,9 +1,12 @@
-/*
-See LICENSE folder for this sample’s licensing information.
+/**
+ The code from this file was taken from Apple's tutorial:
+ Handling 3D Interaction and UI Controls in Augmented Reality
+ https://developer.apple.com/documentation/arkit/handling_3d_interaction_and_ui_controls_in_augmented_reality
+ To this file, we added additional segues: showDetail and showSettings
+ as well as their corresponding logic
+ Look for "MARK: added code" for further details
+ */
 
-Abstract:
-UI Actions for the main view controller.
-*/
 
 import UIKit
 import SceneKit
@@ -55,6 +58,7 @@ extension ViewController: UIGestureRecognizerDelegate {
             self.isRestartAvailable = true
         }
         
+        // MARK: added code
         for i in 0..<VirtualObject.availableObjects.count {
             let tempObject = VirtualObject.availableObjects[i] as VirtualObject
             tempObject.modelQuantity = 0
@@ -79,6 +83,7 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
             popoverController.sourceRect = button.bounds
         }
         
+        // MARK: added code
         guard let identifier = segue.identifier,
               let segueIdentifer = SegueIdentifier(rawValue: identifier),
               segueIdentifer == .showObjects || segueIdentifer == .showDetail ||
@@ -88,25 +93,9 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
             let objectsViewController = segue.destination as! VirtualObjectSelectionViewController
             objectsViewController.virtualObjects = VirtualObject.availableObjects
             objectsViewController.delegate = self
-            
-            // Set all rows of currently placed objects to selected.
-//            for object in virtualObjectLoader.loadedObjects {
-//                guard let index = VirtualObject.availableObjects.index(of: object) else { continue }
-                //objectsViewController.selectedVirtualObjectRows.insert(index)
-//            }
         } else if segueIdentifer == .showDetail {
             let detailViewController = segue.destination as! DetailTableViewController
             detailViewController.placedObjects = VirtualObject.availableObjects
-//            detailViewController.delegate = self
-            
-            // Set all rows of currently placed objects to selected.
-//            for object in virtualObjectLoader.loadedObjects {
-//                guard let index = VirtualObject.availableObjects.index(of: object) else { continue }
-                //objectsViewController.selectedVirtualObjectRows.insert(index)
-//            }
-        } else {
-            let settingsViewController = segue.destination as! SettingsViewController
-            
         }
     }
     

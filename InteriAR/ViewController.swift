@@ -1,9 +1,11 @@
-/*
- See LICENSE folder for this sample’s licensing information.
- 
- Abstract:
- Main view controller for the AR experience.
+/**
+ The code from this file was taken from Apple's tutorial:
+ Handling 3D Interaction and UI Controls in Augmented Reality
+ https://developer.apple.com/documentation/arkit/handling_3d_interaction_and_ui_controls_in_augmented_reality
+ To this file, we added additional buttons and etc.
+ Look for "MARK: added code" for further details
  */
+
 
 import ARKit
 import SceneKit
@@ -21,6 +23,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
+    // MARK: added code
     @IBOutlet weak var detailViewButton: UIButton!
     
     @IBOutlet weak var settingViewButtom: UIButton!
@@ -139,16 +142,6 @@ class ViewController: UIViewController {
     // MARK: - Focus Square
     
     func updateFocusSquare() {
-//        let isObjectVisible = virtualObjectLoader.loadedObjects.contains { object in
-//            return sceneView.isNode(object, insideFrustumOf: sceneView.pointOfView!)
-//        }
-        
-//        if isObjectVisible {
-//            focusSquare.hide()
-//        } else {
-//            focusSquare.unhide()
-//            statusViewController.scheduleMessage("TRY MOVING LEFT OR RIGHT", inSeconds: 5.0, messageType: .focusSquare)
-//        }
         
         // We should always have a valid world position unless the sceen is just being initialized.
         guard let (worldPosition, planeAnchor, _) = sceneView.worldPosition(fromScreenPosition: screenCenter, objectPosition: focusSquare.lastPosition) else {
@@ -156,6 +149,7 @@ class ViewController: UIViewController {
                 self.focusSquare.state = .initializing
                 self.sceneView.pointOfView?.addChildNode(self.focusSquare)
             }
+            // MARK: added code
             addObjectButton.isHidden = true
             detailViewButton.isHidden = true
             settingViewButtom.isHidden = true
@@ -172,6 +166,7 @@ class ViewController: UIViewController {
                 self.focusSquare.state = .featuresDetected(anchorPosition: worldPosition, camera: camera)
             }
         }
+        // MARK: added code
         addObjectButton.isHidden = false
         detailViewButton.isHidden = false
         settingViewButtom.isHidden = false
