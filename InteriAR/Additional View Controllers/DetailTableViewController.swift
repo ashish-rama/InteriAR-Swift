@@ -5,7 +5,9 @@
 
 import UIKit
 
+// Table View Cell
 class DetailCell: UITableViewCell {
+    
     static let reuseIdentifier = "DetailCell"
     
     @IBOutlet weak var objectImageView: UIImageView!
@@ -16,10 +18,10 @@ class DetailCell: UITableViewCell {
     @IBOutlet weak var objectPriceLabel: UILabel!
     @IBOutlet weak var objectQuantityLabel: UILabel!
     
+    // Image derived from model name
     var modelName = "" {
         didSet {
             objectTitleLabel.text = modelName.capitalized
-            //objectImageView.image = UIImage(named: modelName)
             var name = ""
             switch modelName {
             case "lamp":
@@ -45,6 +47,7 @@ class DetailCell: UITableViewCell {
         }
     }
     
+    // format price and quantity
     var modelPrice = 0.0 {
         didSet {
             objectPriceLabel.text = String(format: "$%.2f", modelPrice)
@@ -75,23 +78,16 @@ class DetailTableViewController: UITableViewController {
         totalLabel.text = String(format: "Total: $%.2f", sum)
     }
     
+    // everytime popup shows, update the total label
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTotalLabel()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -113,6 +109,7 @@ class DetailTableViewController: UITableViewController {
         return cell
     }
     
+    // open amazon page if row is pressed
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let url = URL(string: placedObjects[indexPath.row].modelURL) else { return }
@@ -127,50 +124,5 @@ class DetailTableViewController: UITableViewController {
     override func viewWillLayoutSubviews() {
         preferredContentSize = CGSize(width: tableView.contentSize.width, height: tableView.contentSize.height)
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

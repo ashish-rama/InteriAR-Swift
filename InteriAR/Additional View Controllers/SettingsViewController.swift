@@ -7,6 +7,7 @@ import UIKit
 
 class SettingsViewController: UITableViewController {
     
+    // Switches
     @IBOutlet weak var debugModeSwitch: UISwitch!
     @IBOutlet weak var scaleWithPinchGestureSwitch: UISwitch!
     
@@ -22,6 +23,7 @@ class SettingsViewController: UITableViewController {
         scaleWithPinchGestureSwitch.isOn = defaults.bool(for: Setting.scaleWithPinchGesture)
     }
     
+    // Set User Data
     @IBAction func didChangeSettings(_ sender: UISwitch) {
         let defaults = UserDefaults.standard
         switch sender {
@@ -36,8 +38,6 @@ class SettingsViewController: UITableViewController {
     
     
 }
-
-
 
 enum Setting: String {
     case debugMode

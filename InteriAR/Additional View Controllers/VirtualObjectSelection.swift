@@ -9,6 +9,7 @@
 
 import UIKit
 
+// Catalog Table Row
 class ObjectCell: UITableViewCell {
     static let reuseIdentifier = "ObjectCell"
     
@@ -17,6 +18,7 @@ class ObjectCell: UITableViewCell {
     @IBOutlet weak var objectDescription: UILabel!
     @IBOutlet weak var objectPrice: UILabel!
     
+    // Image derived from model name
     var modelName = "" {
         didSet {
             objectTitleLabel.text = modelName.capitalized

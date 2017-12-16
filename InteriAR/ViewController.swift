@@ -32,23 +32,23 @@ class ViewController: UIViewController {
     
     var focusSquare = FocusSquare()
     
-    /// The view controller that displays the status and "restart experience" UI.
+    // The view controller that displays the status and "restart experience" UI.
     lazy var statusViewController: StatusViewController = {
         return childViewControllers.lazy.flatMap({ $0 as? StatusViewController }).first!
     }()
     
     // MARK: - ARKit Configuration Properties
     
-    /// A type which manages gesture manipulation of virtual content in the scene.
+    // A type which manages gesture manipulation of virtual content in the scene.
     lazy var virtualObjectInteraction = VirtualObjectInteraction(sceneView: sceneView)
     
-    /// Coordinates the loading and unloading of reference nodes for virtual objects.
+    // Coordinates the loading and unloading of reference nodes for virtual objects.
     let virtualObjectLoader = VirtualObjectLoader()
     
-    /// Marks if the AR experience is available for restart.
+    // Marks if the AR experience is available for restart.
     var isRestartAvailable = true
     
-    /// A serial queue used to coordinate adding or removing nodes from the scene.
+    // A serial queue used to coordinate adding or removing nodes from the scene.
     let updateQueue = DispatchQueue(label: "com.example.apple-samplecode.arkitexample.serialSceneKitQueue")
     
     var screenCenter: CGPoint {
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         return CGPoint(x: bounds.midX, y: bounds.midY)
     }
     
-    /// Convenience accessor for the session owned by ARSCNView.
+    // Convenience accessor for the session owned by ARSCNView.
     var session: ARSession {
         return sceneView.session
     }

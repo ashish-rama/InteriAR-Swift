@@ -51,7 +51,7 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
         
         let removeGesture = UILongPressGestureRecognizer(target: self, action: #selector(didRemoveObject(_:)))
         
-        // Add gestures to the `sceneView`.
+        // Add gestures to the sceneView.
         sceneView.addGestureRecognizer(panGesture)
         sceneView.addGestureRecognizer(rotationGesture)
         sceneView.addGestureRecognizer(tapGesture)
@@ -155,8 +155,8 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
         return true
     }
 
-    /// A helper method to return the first object that is found under the provided `gesture`s touch locations.
-    /// - Tag: TouchTesting
+    // A helper method to return the first object that is found under the provided `gesture`s touch locations.
+    // - Tag: TouchTesting
     private func objectInteracting(with gesture: UIGestureRecognizer, in view: ARSCNView) -> VirtualObject? {
         for index in 0..<gesture.numberOfTouches {
             let touchLocation = gesture.location(ofTouch: index, in: view)
@@ -173,7 +173,7 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     
     // MARK: - Update object position
 
-    /// - Tag: DragVirtualObject
+    // - Tag: DragVirtualObject
     private func translate(_ object: VirtualObject, basedOn screenPos: CGPoint, infinitePlane: Bool) {
         guard let cameraTransform = sceneView.session.currentFrame?.camera.transform,
             let (position, _, isOnPlane) = sceneView.worldPosition(fromScreenPosition: screenPos,

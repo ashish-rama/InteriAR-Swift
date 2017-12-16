@@ -21,7 +21,7 @@ extension ViewController: UIGestureRecognizerDelegate {
     
     // MARK: - Interface Actions
     
-    /// Displays the `VirtualObjectSelectionViewController` from the `addObjectButton` or in response to a tap gesture in the `sceneView`.
+    // Displays the `VirtualObjectSelectionViewController` from the `addObjectButton` or in response to a tap gesture in the `sceneView`.
     @IBAction func showVirtualObjectSelectionViewController() {
         // Ensure adding objects is an available action and we are not loading another object (to avoid concurrent modifications of the scene).
         guard !addObjectButton.isHidden && !virtualObjectLoader.isLoading else { return }
@@ -30,7 +30,7 @@ extension ViewController: UIGestureRecognizerDelegate {
         performSegue(withIdentifier: SegueIdentifier.showObjects.rawValue, sender: addObjectButton)
     }
     
-    /// Determines if the tap gesture for presenting the `VirtualObjectSelectionViewController` should be used.
+    // Determines if the tap gesture for presenting the `VirtualObjectSelectionViewController` should be used.
     func gestureRecognizerShouldBegin(_: UIGestureRecognizer) -> Bool {
         return virtualObjectLoader.loadedObjects.isEmpty
     }
@@ -39,7 +39,7 @@ extension ViewController: UIGestureRecognizerDelegate {
         return true
     }
     
-    /// - Tag: restartExperience
+    // - Tag: restartExperience
     func restartExperience() {
         guard isRestartAvailable, !virtualObjectLoader.isLoading else { return }
         isRestartAvailable = false
@@ -59,6 +59,7 @@ extension ViewController: UIGestureRecognizerDelegate {
         }
         
         // MARK: added code
+        // reset counters if the reset button is pressed
         for i in 0..<VirtualObject.availableObjects.count {
             let tempObject = VirtualObject.availableObjects[i] as VirtualObject
             tempObject.modelQuantity = 0
@@ -83,7 +84,8 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
             popoverController.sourceRect = button.bounds
         }
         
-        // MARK: added code
+        // MARK: added code to handle the different segues in our
+        // Camera View
         guard let identifier = segue.identifier,
               let segueIdentifer = SegueIdentifier(rawValue: identifier),
               segueIdentifer == .showObjects || segueIdentifer == .showDetail ||

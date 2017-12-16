@@ -29,6 +29,7 @@ class VirtualObject: SCNReferenceNode {
     var modelQuantity: Int
     var modelURL: String
     
+    // Store pointer to base virtual object
     var parentObject: VirtualObject?
     
     // The model's name is derived from the URL of the model
