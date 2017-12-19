@@ -17,6 +17,9 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     /// The scene view to hit test against when moving virtual content.
     let sceneView: VirtualObjectARView
     
+    /// The status message controller
+    let statusView: StatusViewController
+    
     /**
      The object that has been most recently intereacted with.
      The `selectedObject` can be moved at any time with the tap gesture.
@@ -34,8 +37,9 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     /// The tracked screen position used to update the `trackedObject`'s position in `updateObjectToCurrentTrackingPosition()`.
     private var currentTrackingPosition: CGPoint?
 
-    init(sceneView: VirtualObjectARView) {
+    init(sceneView: VirtualObjectARView, statusView: StatusViewController) {
         self.sceneView = sceneView
+        self.statusView = statusView
         super.init()
         
         let panGesture = ThresholdPanGesture(target: self, action: #selector(didPan(_:)))
@@ -129,6 +133,15 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
         if let tappedObject = sceneView.virtualObject(at: touchLocation) {
             // Select a new object.
             selectedObject = tappedObject
+            
+            if(selectedObject?.boundingBox != nil) {
+                let x = (selectedObject?.boundingBox.max.x)! * (selectedObject?.scale.x)!
+                let y = (selectedObject?.boundingBox.max.y)! * (selectedObject?.scale.y)!
+                let z = (selectedObject?.boundingBox.max.z)! * (selectedObject?.scale.z)!
+                statusView.scheduleMessage("\((selectedObject?.modelName.capitalized)!)\nLength: \(getInches(x)), Height: \(getInches(y)), Width: \(getInches(z))",
+                    inSeconds: 0, messageType: .contentPlacement)
+            }
+            
         }
         //else if let object = selectedObject {
             // Teleport the object to whereever the user touched the screen.
@@ -141,6 +154,24 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
         guard gesture.state == .changed else { return }
         if UserDefaults.standard.bool(for: .scaleWithPinchGesture) {
             trackedObject?.scale = SCNVector3Make(Float(gesture.scale), Float(gesture.scale), Float(gesture.scale))
+            if(trackedObject?.boundingBox != nil) {
+                let x = (trackedObject?.boundingBox.max.x)! * (trackedObject?.scale.x)!
+                let y = (trackedObject?.boundingBox.max.y)! * (trackedObject?.scale.y)!
+                let z = (trackedObject?.boundingBox.max.z)! * (trackedObject?.scale.z)!
+                statusView.scheduleMessage("\((selectedObject?.modelName.capitalized)!)\nLength: \(getInches(x)), Height: \(getInches(y)), Width: \(getInches(z))",
+                    inSeconds: 0, messageType: .contentPlacement)
+            }
+        }
+    }
+    
+    func getInches(_ value: Float) -> String {
+        let totalInches = value * 39.37
+        let feet = totalInches / 12
+        let inches = totalInches.truncatingRemainder(dividingBy: 12)
+        if(feet > 1) {
+            return "\(Int(feet))' \(Int(inches))\"";
+        } else {
+            return "\(Int(totalInches))\"";
         }
     }
     
