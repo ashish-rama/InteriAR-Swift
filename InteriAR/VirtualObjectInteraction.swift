@@ -17,7 +17,10 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     
     /// The scene view to hit test against when moving virtual content.
     let sceneView: VirtualObjectARView
-        
+    
+    /// The status view controller
+    let statusView: StatusViewController
+    
     /**
      The object that has been most recently intereacted with.
      The `selectedObject` can be moved at any time with the tap gesture.
@@ -35,8 +38,9 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     /// The tracked screen position used to update the `trackedObject`'s position in `updateObjectToCurrentTrackingPosition()`.
     private var currentTrackingPosition: CGPoint?
 
-    init(sceneView: VirtualObjectARView) {
+    init(sceneView: VirtualObjectARView, statusView: StatusViewController) {
         self.sceneView = sceneView
+        self.statusView = statusView
         super.init()
         
         let panGesture = ThresholdPanGesture(target: self, action: #selector(didPan(_:)))
