@@ -1,9 +1,10 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-Coordinates movement and gesture interactions with virtual objects.
-*/
+/**
+ The code from this file was taken from Apple's tutorial:
+ Handling 3D Interaction and UI Controls in Augmented Reality
+ https://developer.apple.com/documentation/arkit/handling_3d_interaction_and_ui_controls_in_augmented_reality
+ Our additions to this file were two additional gestures,
+ scaleGesture and removeGesture
+ */
 
 import UIKit
 import ARKit
@@ -16,10 +17,7 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     
     /// The scene view to hit test against when moving virtual content.
     let sceneView: VirtualObjectARView
-    
-    /// The status message controller
-    let statusView: StatusViewController
-    
+        
     /**
      The object that has been most recently intereacted with.
      The `selectedObject` can be moved at any time with the tap gesture.
@@ -37,9 +35,8 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     /// The tracked screen position used to update the `trackedObject`'s position in `updateObjectToCurrentTrackingPosition()`.
     private var currentTrackingPosition: CGPoint?
 
-    init(sceneView: VirtualObjectARView, statusView: StatusViewController) {
+    init(sceneView: VirtualObjectARView) {
         self.sceneView = sceneView
-        self.statusView = statusView
         super.init()
         
         let panGesture = ThresholdPanGesture(target: self, action: #selector(didPan(_:)))
@@ -54,7 +51,7 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
         
         let removeGesture = UILongPressGestureRecognizer(target: self, action: #selector(didRemoveObject(_:)))
         
-        // Add gestures to the `sceneView`.
+        // Add gestures to the sceneView.
         sceneView.addGestureRecognizer(panGesture)
         sceneView.addGestureRecognizer(rotationGesture)
         sceneView.addGestureRecognizer(tapGesture)
@@ -143,10 +140,6 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
             }
             
         }
-        //else if let object = selectedObject {
-            // Teleport the object to whereever the user touched the screen.
-        //    translate(object, basedOn: touchLocation, infinitePlane: false)
-        //}
     }
     
     @objc
@@ -175,6 +168,7 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
         }
     }
     
+    // MARK: The following two gestures were implemented by us
     @objc
     func didRemoveObject(_ gesture: UILongPressGestureRecognizer) {
         guard gesture.state == .changed else { return }
@@ -188,8 +182,8 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
         return true
     }
 
-    /// A helper method to return the first object that is found under the provided `gesture`s touch locations.
-    /// - Tag: TouchTesting
+    // A helper method to return the first object that is found under the provided `gesture`s touch locations.
+    // - Tag: TouchTesting
     private func objectInteracting(with gesture: UIGestureRecognizer, in view: ARSCNView) -> VirtualObject? {
         for index in 0..<gesture.numberOfTouches {
             let touchLocation = gesture.location(ofTouch: index, in: view)
@@ -206,7 +200,7 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     
     // MARK: - Update object position
 
-    /// - Tag: DragVirtualObject
+    // - Tag: DragVirtualObject
     private func translate(_ object: VirtualObject, basedOn screenPos: CGPoint, infinitePlane: Bool) {
         guard let cameraTransform = sceneView.session.currentFrame?.camera.transform,
             let (position, _, isOnPlane) = sceneView.worldPosition(fromScreenPosition: screenPos,

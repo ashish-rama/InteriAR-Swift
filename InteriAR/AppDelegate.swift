@@ -1,10 +1,8 @@
-//
-//  AppDelegate.swift
-//  InteriAR
-//
-//  Created by Ashish Ramachandran on 11/28/17.
-//  Copyright © 2017 Ashish Ramachandran. All rights reserved.
-//
+/**
+ The code from this file was based off of Apple's tutorial:
+ Handling 3D Interaction and UI Controls in Augmented Reality
+ https://developer.apple.com/documentation/arkit/handling_3d_interaction_and_ui_controls_in_augmented_reality
+ */
 
 import UIKit
 import ARKit

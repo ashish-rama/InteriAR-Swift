@@ -1,9 +1,9 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-Methods on the main view controller for handling virtual object loading and movement
-*/
+/**
+ The code from this file was taken from Apple's tutorial:
+ Handling 3D Interaction and UI Controls in Augmented Reality
+ https://developer.apple.com/documentation/arkit/handling_3d_interaction_and_ui_controls_in_augmented_reality
+ and was not changed/modified by either of us.
+ */
 
 import UIKit
 import SceneKit
@@ -30,8 +30,6 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
             self.sceneView.scene.rootNode.addChildNode(virtualObject)
         }
     }
-    
-    
     
     func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, object: VirtualObject) {
         virtualObjectLoader.loadVirtualObject(object, loadedHandler: {[unowned self] loadedObject

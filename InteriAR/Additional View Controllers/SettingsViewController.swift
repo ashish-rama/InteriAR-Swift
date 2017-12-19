@@ -1,15 +1,13 @@
-//
-//  SettingsViewController.swift
-//  InteriAR
-//
-//  Created by Ashish Ramachandran on 12/6/17.
-//  Copyright © 2017 Ashish Ramachandran. All rights reserved.
-//
+/*
+ This view controller controls the settting popup embedded in the
+ main Camera View
+ */
 
 import UIKit
 
 class SettingsViewController: UITableViewController {
     
+    // Switches
     @IBOutlet weak var debugModeSwitch: UISwitch!
     @IBOutlet weak var scaleWithPinchGestureSwitch: UISwitch!
     
@@ -25,6 +23,7 @@ class SettingsViewController: UITableViewController {
         scaleWithPinchGestureSwitch.isOn = defaults.bool(for: Setting.scaleWithPinchGesture)
     }
     
+    // Set User Data
     @IBAction func didChangeSettings(_ sender: UISwitch) {
         let defaults = UserDefaults.standard
         switch sender {
@@ -39,8 +38,6 @@ class SettingsViewController: UITableViewController {
     
     
 }
-
-
 
 enum Setting: String {
     case debugMode

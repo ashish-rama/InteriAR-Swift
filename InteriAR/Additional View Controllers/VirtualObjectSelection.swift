@@ -1,14 +1,15 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-Popover view controller for choosing virtual objects to place in the AR scene.
-*/
+/**
+ The code from this file was based off of Apple's tutorial:
+ Handling 3D Interaction and UI Controls in Augmented Reality
+ https://developer.apple.com/documentation/arkit/handling_3d_interaction_and_ui_controls_in_augmented_reality
+ The only portion of code that remains unchanged from the original is
+ VirtualObjectSelectionViewControllerDelegate.
+ The rest was written/modified.
+ */
 
 import UIKit
 
-// MARK: - ObjectCell
-
+// Catalog Table Row
 class ObjectCell: UITableViewCell {
     static let reuseIdentifier = "ObjectCell"
     
@@ -17,10 +18,10 @@ class ObjectCell: UITableViewCell {
     @IBOutlet weak var objectDescription: UILabel!
     @IBOutlet weak var objectPrice: UILabel!
     
+    // Image derived from model name
     var modelName = "" {
         didSet {
             objectTitleLabel.text = modelName.capitalized
-            //objectImageView.image = UIImage(named: modelName)
             var name = ""
             switch modelName {
             case "lamp":
@@ -67,14 +68,10 @@ protocol VirtualObjectSelectionViewControllerDelegate: class {
                                               object: VirtualObject)
 }
 
-/// A custom table view controller to allow users to select `VirtualObject`s for placement in the scene.
 class VirtualObjectSelectionViewController: UITableViewController {
     
-    /// The collection of `VirtualObject`s to select from.
+    /// The collection of VirtualObjects to select from.
     public var virtualObjects = [VirtualObject]()
-    
-    /// The rows of the currently selected `VirtualObject`s.
-    //var selectedVirtualObjectRows = IndexSet()
     
     weak var delegate: VirtualObjectSelectionViewControllerDelegate?
     
@@ -88,19 +85,17 @@ class VirtualObjectSelectionViewController: UITableViewController {
         preferredContentSize = CGSize(width: tableView.contentSize.width, height: tableView.contentSize.height)
     }
     
-    // MARK: - UITableViewDelegate
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let object = virtualObjects[indexPath.row]
         object.modelQuantity += 1
 
+        // clone object to allow multiple instances of each
+        // AR object to be placed
         let newObject = object.clone();
         newObject.parentObject = object
         delegate?.virtualObjectSelectionViewController(self, object: newObject)
         dismiss(animated: true, completion: nil)
     }
-        
-    // MARK: - UITableViewDataSource
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return virtualObjects.count
