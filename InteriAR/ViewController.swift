@@ -10,6 +10,7 @@
 import ARKit
 import SceneKit
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
     
@@ -27,6 +28,144 @@ class ViewController: UIViewController {
     @IBOutlet weak var detailViewButton: UIButton!
     
     @IBOutlet weak var settingViewButtom: UIButton!
+    
+    @IBOutlet weak var saveLayoutButton: UIButton!
+    
+    @IBAction func saveLayoutPressed(_ sender: Any) {
+        showInputDialog()
+    }
+    
+    func showInputDialog() {
+        //Creating UIAlertController and setting title and message for the alert dialog
+        let alertController = UIAlertController(title: "Save Layout", message: "Enter a layout name", preferredStyle: .alert)
+        
+        //the confirm action taking the inputs
+        let confirmAction = UIAlertAction(title: "Enter", style: .default) {
+            [unowned self] action in
+            
+            guard let textField = alertController.textFields?.first,
+                let nameToSave = textField.text else {
+                    return
+            }
+            self.save(name: nameToSave)
+        }
+        
+        //the cancel action doing nothing
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+        
+        //adding textfields to our dialog box
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Enter Layout Name"
+        }
+        
+        //adding the action to dialogbox
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        
+        //finally presenting the dialog box
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func save(name: String) {
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let entity = NSEntityDescription.entity(forEntityName: "Layout",
+                                                in: managedContext)!
+        
+        let layout = NSManagedObject(entity: entity,
+                                     insertInto: managedContext)
+        
+        layout.setValue(name, forKeyPath: "name")
+        print("Set name")
+        //let imageData = UIImagePNGRepresentation(generatePhotoThumbnail(image: self.sceneView.snapshot())) as Data?;
+        let imageData = UIImagePNGRepresentation(self.sceneView.snapshot()) as Data?
+        layout.setValue(imageData, forKeyPath: "thumbnail")
+        print("Set thumbnail")
+        
+        for a in VirtualObject.availableObjects {
+            let v = a as VirtualObject
+            switch (v.modelName) {
+            case "vase":
+                layout.setValue(v.modelPrice, forKeyPath: "priceVase")
+                layout.setValue(v.modelQuantity, forKeyPath: "numVase")
+                break
+            case "chair":
+                layout.setValue(v.modelPrice, forKeyPath: "priceChair")
+                layout.setValue(v.modelQuantity, forKeyPath: "numChair")
+                break
+            case "candle":
+                layout.setValue(v.modelPrice, forKeyPath: "priceCandle")
+                layout.setValue(v.modelQuantity, forKeyPath: "numCandle")
+                break
+            case "chair":
+                layout.setValue(v.modelPrice, forKeyPath: "priceChair")
+                layout.setValue(v.modelQuantity, forKeyPath: "numChair")
+                break
+            case "cup":
+                layout.setValue(v.modelPrice, forKeyPath: "priceCup")
+                layout.setValue(v.modelQuantity, forKeyPath: "numCup")
+                break
+            case "lamp":
+                layout.setValue(v.modelPrice, forKeyPath: "priceLamp")
+                layout.setValue(v.modelQuantity, forKeyPath: "numLamp")
+                break
+            default:
+                layout.setValue(v.modelPrice, forKeyPath: "priceLamp")
+                layout.setValue(v.modelQuantity, forKeyPath: "numLamp")
+            }
+        }
+        print("Set Objects")
+        
+        do {
+            try managedContext.save()
+            print("Successfully saved entity")
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    func generatePhotoThumbnail(image: UIImage) -> UIImage {
+        // Create a thumbnail version of the image for the event object.
+        let size: CGSize = image.size
+        var croppedSize: CGSize
+        let ratio: CGFloat = 64.0
+        var offsetX: CGFloat = 0.0
+        var offsetY: CGFloat = 0.0
+        
+        // check the size of the image, we want to make it
+        // a square with sides the size of the smallest dimension
+        if (size.width > size.height) {
+            offsetX = (size.height - size.width) / 2;
+            croppedSize = CGSize(width: size.height, height: size.height);
+        } else {
+            offsetY = (size.width - size.height) / 2;
+            croppedSize = CGSize(width: size.width, height: size.width);
+        }
+        
+        // Crop the image before resize
+        let clippedRect: CGRect = CGRect(x: offsetX * -1, y: offsetY * -1, width: croppedSize.width, height: croppedSize.height)
+        guard let imageRef: CGImage = image.cgImage?.cropping(to: clippedRect) else {
+            return image
+        }
+        
+        // Resize the image
+        let rect: CGRect = CGRect(x: 0.0, y: 0.0, width: ratio, height: ratio)
+        
+        UIGraphicsBeginImageContext(rect.size)
+        UIImage(cgImage: imageRef).draw(in: rect)
+        guard let thumbnail: UIImage = UIGraphicsGetImageFromCurrentImageContext() else {
+            return image
+        }
+        UIGraphicsEndImageContext();
+        
+        return thumbnail
+    }
     
     // MARK: - UI Elements
     
@@ -153,6 +292,7 @@ class ViewController: UIViewController {
             addObjectButton.isHidden = true
             detailViewButton.isHidden = true
             settingViewButtom.isHidden = true
+            saveLayoutButton.isHidden = true
             return
         }
         
@@ -170,6 +310,7 @@ class ViewController: UIViewController {
         addObjectButton.isHidden = false
         detailViewButton.isHidden = false
         settingViewButtom.isHidden = false
+        saveLayoutButton.isHidden = false
         statusViewController.cancelScheduledMessage(for: .focusSquare)
     }
     

@@ -27,6 +27,10 @@
 		750D780D1FD7505F00C21C2E /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750D780B1FD7505E00C21C2E /* DetailTableViewController.swift */; };
 		751962091FCE32BC000634EC /* VirtualObjectARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751962081FCE32BC000634EC /* VirtualObjectARView.swift */; };
 		7519620C1FCE3568000634EC /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7519620B1FCE3568000634EC /* VirtualObject.swift */; };
+		755C98FC1FE9D87600E42A8C /* SaveTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755C98FB1FE9D87600E42A8C /* SaveTableViewController.swift */; };
+		755C98FE1FE9D8A700E42A8C /* LayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755C98FD1FE9D8A700E42A8C /* LayoutViewController.swift */; };
+		755C99031FE9D9A700E42A8C /* Layout.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 755C98FF1FE9D9A700E42A8C /* Layout.xcdatamodeld */; };
+		755C99041FE9D9A700E42A8C /* SaveLayoutModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 755C99011FE9D9A700E42A8C /* SaveLayoutModel.xcdatamodeld */; };
 		75EB341C1FD7C48E00EB5C08 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EB341B1FD7C48E00EB5C08 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +76,10 @@
 		750D780B1FD7505E00C21C2E /* DetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		751962081FCE32BC000634EC /* VirtualObjectARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectARView.swift; sourceTree = "<group>"; };
 		7519620B1FCE3568000634EC /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
+		755C98FB1FE9D87600E42A8C /* SaveTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTableViewController.swift; sourceTree = "<group>"; };
+		755C98FD1FE9D8A700E42A8C /* LayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutViewController.swift; sourceTree = "<group>"; };
+		755C99001FE9D9A700E42A8C /* Layout.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Layout.xcdatamodel; sourceTree = "<group>"; };
+		755C99021FE9D9A700E42A8C /* SaveLayoutModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SaveLayoutModel.xcdatamodel; sourceTree = "<group>"; };
 		75EB341B1FD7C48E00EB5C08 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,6 +154,8 @@
 				7507BC0B1FCDCE3700DE055C /* Assets.xcassets */,
 				750D78081FD72AF800C21C2E /* Main.storyboard */,
 				7507BC341FCDD0EF00DE055C /* LaunchScreen.storyboard */,
+				755C98FF1FE9D9A700E42A8C /* Layout.xcdatamodeld */,
+				755C99011FE9D9A700E42A8C /* SaveLayoutModel.xcdatamodeld */,
 				7507BC101FCDCE3700DE055C /* Info.plist */,
 			);
 			path = Resources;
@@ -167,6 +177,8 @@
 				750D78011FD72AD800C21C2E /* VirtualObjectSelection.swift */,
 				750D780B1FD7505E00C21C2E /* DetailTableViewController.swift */,
 				75EB341B1FD7C48E00EB5C08 /* SettingsViewController.swift */,
+				755C98FB1FE9D87600E42A8C /* SaveTableViewController.swift */,
+				755C98FD1FE9D8A700E42A8C /* LayoutViewController.swift */,
 			);
 			path = "Additional View Controllers";
 			sourceTree = "<group>";
@@ -330,7 +342,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				755C99041FE9D9A700E42A8C /* SaveLayoutModel.xcdatamodeld in Sources */,
 				750D77F61FD7297000C21C2E /* ViewController+ObjectSelection.swift in Sources */,
+				755C99031FE9D9A700E42A8C /* Layout.xcdatamodeld in Sources */,
 				750D78031FD72AD800C21C2E /* VirtualObjectSelection.swift in Sources */,
 				750D77F41FD7297000C21C2E /* VirtualObjectInteraction.swift in Sources */,
 				750D78051FD72ADD00C21C2E /* Utilities.swift in Sources */,
@@ -342,9 +356,11 @@
 				750D78021FD72AD800C21C2E /* StatusViewController.swift in Sources */,
 				750D77F31FD7297000C21C2E /* ViewController+Actions.swift in Sources */,
 				750D77FF1FD72AD200C21C2E /* FocusSquareSegment.swift in Sources */,
+				755C98FC1FE9D87600E42A8C /* SaveTableViewController.swift in Sources */,
 				75EB341C1FD7C48E00EB5C08 /* SettingsViewController.swift in Sources */,
 				750D77F81FD729A000C21C2E /* VirtualObjectLoader.swift in Sources */,
 				7507BC031FCDCE3700DE055C /* AppDelegate.swift in Sources */,
+				755C98FE1FE9D8A700E42A8C /* LayoutViewController.swift in Sources */,
 				750D77F51FD7297000C21C2E /* ThresholdPanGesture.swift in Sources */,
 				750D77FE1FD72AD200C21C2E /* FocusSquare.swift in Sources */,
 			);
@@ -503,7 +519,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CCFRPZ2B3X;
+				DEVELOPMENT_TEAM = DBJCYT492W;
 				INFOPLIST_FILE = "$(SRCROOT)/InteriAR/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ashishios.InteriAR;
@@ -518,7 +534,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CCFRPZ2B3X;
+				DEVELOPMENT_TEAM = DBJCYT492W;
 				INFOPLIST_FILE = "$(SRCROOT)/InteriAR/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ashishios.InteriAR;
@@ -634,6 +650,29 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		755C98FF1FE9D9A700E42A8C /* Layout.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				755C99001FE9D9A700E42A8C /* Layout.xcdatamodel */,
+			);
+			currentVersion = 755C99001FE9D9A700E42A8C /* Layout.xcdatamodel */;
+			path = Layout.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		755C99011FE9D9A700E42A8C /* SaveLayoutModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				755C99021FE9D9A700E42A8C /* SaveLayoutModel.xcdatamodel */,
+			);
+			currentVersion = 755C99021FE9D9A700E42A8C /* SaveLayoutModel.xcdatamodel */;
+			path = SaveLayoutModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7507BBF71FCDCE3700DE055C /* Project object */;
 }
