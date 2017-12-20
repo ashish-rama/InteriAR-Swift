@@ -70,18 +70,17 @@ override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: Inde
 ```
 [View in Source](x-source-tag://ObjectSelection)
 
-## Media
-
-![Fully Furnished Room](Documentation/Fully-Furnished.png)
-![Settings](Documentation/Settings.png)
-![Catalog](Documentation/Catalog.png)
-![Checkout](Documentation/Checkout.png)
-![Main](Documentation/Main.png)
-![Save](Documentation/Save.png)
-![Saved-Layouts](Documentation/Saved-Layouts.png)
-![Detail](Documentation/Detail.png)
-
 ## Further Steps
 
 We would like to integrate our application with some database to allow users to upload and download their own models (e.g. Firebase) to make InteriAR more interactive and flexible. We would also like to have a more robust layout saving system and have the ability to save and render previously furnished rooms (rather than just prices and quantities) and send/share layouts.
 
+## Media
+
+![Fully Furnished Room](Documentation/Fully-Furnished.PNG)
+![Settings](Documentation/Settings.PNG)
+![Catalog](Documentation/Catalog.PNG)
+![Checkout](Documentation/Checkout.PNG)
+![Main](Documentation/Main.PNG)
+![Save](Documentation/Save.PNG)
+![Saved-Layouts](Documentation/Saved-Layouts.PNG)
+![Detail](Documentation/Detail.PNG)
