@@ -1,4 +1,5 @@
 /**
+ New File:
  This file contains code for controlling the DetailView embedded in the
  main Camera View, and the cells in the corresponding table
  */

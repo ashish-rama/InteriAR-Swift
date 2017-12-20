@@ -2,6 +2,7 @@
  The code from this file was based off of Apple's tutorial:
  Handling 3D Interaction and UI Controls in Augmented Reality
  https://developer.apple.com/documentation/arkit/handling_3d_interaction_and_ui_controls_in_augmented_reality
+ To this file, we added Core Data support
  */
 
 import UIKit
@@ -50,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.saveContext()
     }
     
+    // Initialize Core Data
     lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
@@ -77,8 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return container
     }()
     
-    // MARK: - Core Data Saving support
-    
+    // Added Core Data Saving support
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -93,6 +94,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-
 }
-

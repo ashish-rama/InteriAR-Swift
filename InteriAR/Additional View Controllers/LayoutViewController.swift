@@ -1,4 +1,5 @@
 /**
+ New File:
  This file lays out a detailed view associated with each saved layout
  */
 
@@ -42,6 +43,7 @@ class LayoutViewController: UIViewController {
                 navigationItem.title = "Unnamed Layout"
             }
             
+            // do calculations
             var q: Int = 0
             var p: Float = 0.0
             if layout.value(forKeyPath: "numCup") != nil {

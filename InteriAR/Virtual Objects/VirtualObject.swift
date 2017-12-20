@@ -3,7 +3,13 @@
  Handling 3D Interaction and UI Controls in Augmented Reality
  https://developer.apple.com/documentation/arkit/handling_3d_interaction_and_ui_controls_in_augmented_reality
  See the inline comments for details regarding we changed/modified
- and what was left unchanged
+ and what was left unchanged vs. what was changed, look for:
+ MARK:
+ The rest of this file was left unchanged from the
+ original tutorial
+ 
+ To see what portions we left unchanged
+ 
  */
 
 import Foundation
@@ -41,6 +47,7 @@ class VirtualObject: SCNReferenceNode {
     }
     
     // Loads all the model objects within assets folders
+    // Heavily changed from original version
     static let availableObjects: [VirtualObject] = {
         let modelsURL = Bundle.main.url(forResource: "Models.scnassets", withExtension: nil)!
         
@@ -51,6 +58,7 @@ class VirtualObject: SCNReferenceNode {
             
             guard url.pathExtension == "scn" else { return nil }
             
+            // load models from assets
             switch (url.lastPathComponent) {
             case "candle.scn":
                 return VirtualObject(url: url, modelDescription: "For romantic nights.", modelPrice: 16.00, modelQuantity: 0, modelURL: "https://www.amazon.com/Celestial-Lights-Bright-Battery-Operated/dp/B077VXWJSR/ref=sr_1_15?ie=UTF8&qid=1512546876&sr=8-15&keywords=candle")

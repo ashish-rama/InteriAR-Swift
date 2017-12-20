@@ -30,7 +30,6 @@
 		755C98FC1FE9D87600E42A8C /* SaveTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755C98FB1FE9D87600E42A8C /* SaveTableViewController.swift */; };
 		755C98FE1FE9D8A700E42A8C /* LayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755C98FD1FE9D8A700E42A8C /* LayoutViewController.swift */; };
 		755C99031FE9D9A700E42A8C /* Layout.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 755C98FF1FE9D9A700E42A8C /* Layout.xcdatamodeld */; };
-		755C99041FE9D9A700E42A8C /* SaveLayoutModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 755C99011FE9D9A700E42A8C /* SaveLayoutModel.xcdatamodeld */; };
 		7596A8191FEA3A9300AAF4EC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7596A8181FEA3A9300AAF4EC /* README.md */; };
 		75EB341C1FD7C48E00EB5C08 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EB341B1FD7C48E00EB5C08 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -80,7 +79,6 @@
 		755C98FB1FE9D87600E42A8C /* SaveTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTableViewController.swift; sourceTree = "<group>"; };
 		755C98FD1FE9D8A700E42A8C /* LayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutViewController.swift; sourceTree = "<group>"; };
 		755C99001FE9D9A700E42A8C /* Layout.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Layout.xcdatamodel; sourceTree = "<group>"; };
-		755C99021FE9D9A700E42A8C /* SaveLayoutModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SaveLayoutModel.xcdatamodel; sourceTree = "<group>"; };
 		7596A8181FEA3A9300AAF4EC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		75EB341B1FD7C48E00EB5C08 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,7 +156,6 @@
 				750D78081FD72AF800C21C2E /* Main.storyboard */,
 				7507BC341FCDD0EF00DE055C /* LaunchScreen.storyboard */,
 				755C98FF1FE9D9A700E42A8C /* Layout.xcdatamodeld */,
-				755C99011FE9D9A700E42A8C /* SaveLayoutModel.xcdatamodeld */,
 				7507BC101FCDCE3700DE055C /* Info.plist */,
 			);
 			path = Resources;
@@ -346,7 +343,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				755C99041FE9D9A700E42A8C /* SaveLayoutModel.xcdatamodeld in Sources */,
 				750D77F61FD7297000C21C2E /* ViewController+ObjectSelection.swift in Sources */,
 				755C99031FE9D9A700E42A8C /* Layout.xcdatamodeld in Sources */,
 				750D78031FD72AD800C21C2E /* VirtualObjectSelection.swift in Sources */,
@@ -663,16 +659,6 @@
 			);
 			currentVersion = 755C99001FE9D9A700E42A8C /* Layout.xcdatamodel */;
 			path = Layout.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		755C99011FE9D9A700E42A8C /* SaveLayoutModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				755C99021FE9D9A700E42A8C /* SaveLayoutModel.xcdatamodel */,
-			);
-			currentVersion = 755C99021FE9D9A700E42A8C /* SaveLayoutModel.xcdatamodel */;
-			path = SaveLayoutModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -1,4 +1,5 @@
 /**
+ New File:
  This file lays out a table view of saved layouts
  */
 
@@ -11,14 +12,49 @@ class SaveCell: UITableViewCell {
     @IBOutlet weak var imageThumbnail: UIImageView!
     
     @IBOutlet weak var nameLabel: UILabel!
-    
-    @IBOutlet weak var dateLabel: UILabel!
 }
 
 
 class SaveTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     var layouts: [NSManagedObject] = []
+    
+    func generatePhotoThumbnail(image: UIImage) -> UIImage {
+        // Create a thumbnail version of the image for the event object.
+        let size: CGSize = image.size
+        var croppedSize: CGSize
+        let ratio: CGFloat = 64.0
+        var offsetX: CGFloat = 0.0
+        var offsetY: CGFloat = 0.0
+        
+        // check the size of the image, we want to make it
+        // a square with sides the size of the smallest dimension
+        if (size.width > size.height) {
+            offsetX = (size.height - size.width) / 2;
+            croppedSize = CGSize(width: size.height, height: size.height);
+        } else {
+            offsetY = (size.width - size.height) / 2;
+            croppedSize = CGSize(width: size.width, height: size.width);
+        }
+        
+        // Crop the image before resize
+        let clippedRect: CGRect = CGRect(x: offsetX * -1, y: offsetY * -1, width: croppedSize.width, height: croppedSize.height)
+        guard let imageRef: CGImage = image.cgImage?.cropping(to: clippedRect) else {
+            return image
+        }
+        
+        // Resize the image
+        let rect: CGRect = CGRect(x: 0.0, y: 0.0, width: ratio, height: ratio)
+        
+        UIGraphicsBeginImageContext(rect.size)
+        UIImage(cgImage: imageRef).draw(in: rect)
+        guard let thumbnail: UIImage = UIGraphicsGetImageFromCurrentImageContext() else {
+            return image
+        }
+        UIGraphicsEndImageContext();
+        
+        return thumbnail
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +75,9 @@ class SaveTableViewController: UITableViewController, NSFetchedResultsController
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Layout")
         do {
             layouts = try managedContext.fetch(fetchRequest)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
             print("Loaded all layouts")
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
@@ -59,11 +98,6 @@ class SaveTableViewController: UITableViewController, NSFetchedResultsController
         cell.nameLabel?.text = layout.value(forKeyPath: "name") as? String
         let imageData = layout.value(forKeyPath: "thumbnail") as? Data;
         cell.imageView?.image = UIImage(data: imageData!)
-        
-        //        let dateFormatter = DateFormatter()
-        //        let dateData = layout.value(forKeyPath: "date") as? Date;
-        //        let timeString = "\(dateFormatter.string(from: dateData!))"
-        //        cell.dateLabel.text = timeString
         return cell
     }
     
@@ -91,6 +125,7 @@ class SaveTableViewController: UITableViewController, NSFetchedResultsController
             
             do {
                 try managedContext.save()
+                appDelegate.saveContext()
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
             catch let error {

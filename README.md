@@ -70,6 +70,16 @@ override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: Inde
 ```
 [View in Source](x-source-tag://ObjectSelection)
 
+## Media
+
+![Fully Furnished Room](Documentation/Fully-Furnished.png)
+![Settings](Documentation/Settings.png)
+![Catalog](Documentation/Catalog.png)
+![Checkout](Documentation/Checkout.png)
+![Main](Documentation/Main.png)
+![Save](Documentation/Save.png)
+![Saved-Layouts](Documentation/Saved-Layouts.png)
+![Detail](Documentation/Detail.png)
 
 ## Further Steps
 

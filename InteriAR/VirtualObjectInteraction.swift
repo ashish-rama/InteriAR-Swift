@@ -3,7 +3,8 @@
  Handling 3D Interaction and UI Controls in Augmented Reality
  https://developer.apple.com/documentation/arkit/handling_3d_interaction_and_ui_controls_in_augmented_reality
  Our additions to this file were two additional gestures,
- scaleGesture and removeGesture
+ scaleGesture and removeGesture, also added scaling display
+ Look for "MARK: added code"
  */
 
 import UIKit
@@ -55,6 +56,7 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
         
         let removeGesture = UILongPressGestureRecognizer(target: self, action: #selector(didRemoveObject(_:)))
         
+        // MARK: added code
         // Add gestures to the sceneView.
         sceneView.addGestureRecognizer(panGesture)
         sceneView.addGestureRecognizer(rotationGesture)
@@ -135,6 +137,8 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
             // Select a new object.
             selectedObject = tappedObject
             
+            // MARK: added code
+            // show dimensions of scaled object
             if(selectedObject?.boundingBox != nil) {
                 let x = (selectedObject?.boundingBox.max.x)! * (selectedObject?.scale.x)!
                 let y = (selectedObject?.boundingBox.max.y)! * (selectedObject?.scale.y)!
@@ -146,6 +150,8 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
         }
     }
     
+    // MARK: added code
+    // show dimensions of scaled object
     @objc
     func didScale(_ gesture: UIPinchGestureRecognizer) {
         guard gesture.state == .changed else { return }
@@ -161,6 +167,8 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
         }
     }
     
+    // MARK: added code
+    // utility method to get measurements of object
     func getInches(_ value: Float) -> String {
         let totalInches = value * 39.37
         let feet = totalInches / 12

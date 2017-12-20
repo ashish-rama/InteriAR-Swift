@@ -2,8 +2,8 @@
  The code from this file was taken from Apple's tutorial:
  Handling 3D Interaction and UI Controls in Augmented Reality
  https://developer.apple.com/documentation/arkit/handling_3d_interaction_and_ui_controls_in_augmented_reality
- To this file, we added additional buttons and etc.
- Look for "MARK: added code" for further details
+ To this file, we added additional buttons, core data stuff, and etc.
+ Look for "MARK: added code" and "MARK: end added code" for further details
  */
 
 
@@ -25,21 +25,25 @@ class ViewController: UIViewController {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     // MARK: added code
+    var imageData: Data?
+    
     @IBOutlet weak var detailViewButton: UIButton!
     
     @IBOutlet weak var settingViewButtom: UIButton!
     
     @IBOutlet weak var saveLayoutButton: UIButton!
     
+    // Save button pressed
     @IBAction func saveLayoutPressed(_ sender: Any) {
         showInputDialog()
     }
     
+    // show the input alert containing name input box
     func showInputDialog() {
-        //Creating UIAlertController and setting title and message for the alert dialog
+        // Creating UIAlertController and setting title and message for the alert dialog
         let alertController = UIAlertController(title: "Save Layout", message: "Enter a layout name", preferredStyle: .alert)
         
-        //the confirm action taking the inputs
+        // the confirm action taking the inputs
         let confirmAction = UIAlertAction(title: "Enter", style: .default) {
             [unowned self] action in
             
@@ -50,22 +54,27 @@ class ViewController: UIViewController {
             self.save(name: nameToSave)
         }
         
-        //the cancel action doing nothing
+        // take snapshot of current view when save is pressed
+        self.imageData = UIImagePNGRepresentation(self.sceneView.snapshot()) as Data?
+
+        
+        // the cancel action doing nothing
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
         
-        //adding textfields to our dialog box
+        // adding textfields to our dialog box
         alertController.addTextField { (textField) in
             textField.placeholder = "Enter Layout Name"
         }
         
-        //adding the action to dialogbox
+        // adding the action to dialogbox
         alertController.addAction(confirmAction)
         alertController.addAction(cancelAction)
         
-        //finally presenting the dialog box
+        // finally presenting the dialog box
         self.present(alertController, animated: true, completion: nil)
     }
     
+    // saves to Core Data
     func save(name: String) {
         
         guard let appDelegate =
@@ -81,10 +90,13 @@ class ViewController: UIViewController {
         let layout = NSManagedObject(entity: entity,
                                      insertInto: managedContext)
         
+        // set a bunch of key-value pairs
         layout.setValue(name, forKeyPath: "name")
         print("Set name")
         //let imageData = UIImagePNGRepresentation(generatePhotoThumbnail(image: self.sceneView.snapshot())) as Data?;
-        let imageData = UIImagePNGRepresentation(self.sceneView.snapshot()) as Data?
+        if self.imageData == nil {
+            self.imageData = UIImagePNGRepresentation(self.sceneView.snapshot()) as Data?
+        }
         layout.setValue(imageData, forKeyPath: "thumbnail")
         print("Set thumbnail")
         
@@ -124,48 +136,13 @@ class ViewController: UIViewController {
         
         do {
             try managedContext.save()
+            appDelegate.saveContext()
             print("Successfully saved entity")
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
     }
-    
-    func generatePhotoThumbnail(image: UIImage) -> UIImage {
-        // Create a thumbnail version of the image for the event object.
-        let size: CGSize = image.size
-        var croppedSize: CGSize
-        let ratio: CGFloat = 64.0
-        var offsetX: CGFloat = 0.0
-        var offsetY: CGFloat = 0.0
-        
-        // check the size of the image, we want to make it
-        // a square with sides the size of the smallest dimension
-        if (size.width > size.height) {
-            offsetX = (size.height - size.width) / 2;
-            croppedSize = CGSize(width: size.height, height: size.height);
-        } else {
-            offsetY = (size.width - size.height) / 2;
-            croppedSize = CGSize(width: size.width, height: size.width);
-        }
-        
-        // Crop the image before resize
-        let clippedRect: CGRect = CGRect(x: offsetX * -1, y: offsetY * -1, width: croppedSize.width, height: croppedSize.height)
-        guard let imageRef: CGImage = image.cgImage?.cropping(to: clippedRect) else {
-            return image
-        }
-        
-        // Resize the image
-        let rect: CGRect = CGRect(x: 0.0, y: 0.0, width: ratio, height: ratio)
-        
-        UIGraphicsBeginImageContext(rect.size)
-        UIImage(cgImage: imageRef).draw(in: rect)
-        guard let thumbnail: UIImage = UIGraphicsGetImageFromCurrentImageContext() else {
-            return image
-        }
-        UIGraphicsEndImageContext();
-        
-        return thumbnail
-    }
+    // MARK: end added code
     
     // MARK: - UI Elements
     

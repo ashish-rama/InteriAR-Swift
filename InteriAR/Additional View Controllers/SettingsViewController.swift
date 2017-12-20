@@ -1,4 +1,5 @@
 /*
+ New File:
  This view controller controls the settting popup embedded in the
  main Camera View
  */
