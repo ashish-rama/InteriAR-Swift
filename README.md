@@ -1,4 +1,4 @@
-# ![AppIcon](InteriAR/Resources/Assets.xcassets/AppIcon.appiconset/home-small.png) InteriAR
+# ![AppIcon](InteriAR/Resources/Assets.xcassets/AppIcon.appiconset/small-icon.png) InteriAR
 
 Created by Ashish Ramachandran and Herbert Li // Fall 2017
 
