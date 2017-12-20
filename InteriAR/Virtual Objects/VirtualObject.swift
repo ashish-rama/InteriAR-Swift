@@ -24,6 +24,8 @@ class VirtualObject: SCNReferenceNode {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// - Tag: VirtualObject
+    
     var modelDescription: String
     var modelPrice: Double
     var modelQuantity: Int

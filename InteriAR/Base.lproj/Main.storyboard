@@ -228,7 +228,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GBj-4O-Whc"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Camera" image="chair" id="IHt-36-Bjy"/>
+                    <tabBarItem key="tabBarItem" title="Camera" image="camera" id="IHt-36-Bjy"/>
                     <connections>
                         <outlet property="addObjectButton" destination="xcf-ic-uGo" id="uFa-W2-4Iu"/>
                         <outlet property="blurView" destination="R5W-V8-6lY" id="oF2-lD-Srf"/>
@@ -856,7 +856,7 @@
         <scene sceneID="Gvb-TZ-VoN">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="J9n-h7-r0I" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Saved Layouts" image="vase" id="43G-Ob-BeU"/>
+                    <tabBarItem key="tabBarItem" title="Saved Layouts" image="chair" id="43G-Ob-BeU"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="AXW-bk-zdg">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -892,12 +892,12 @@
     </scenes>
     <resources>
         <image name="add" width="48" height="48"/>
+        <image name="camera" width="30" height="30"/>
         <image name="chair" width="30" height="30"/>
         <image name="checkout" width="48" height="48"/>
         <image name="restart" width="20" height="23"/>
         <image name="restartPressed" width="20" height="23"/>
         <image name="save" width="350" height="350"/>
         <image name="settings" width="48" height="48"/>
-        <image name="vase" width="30" height="30"/>
     </resources>
 </document>

@@ -85,6 +85,8 @@ class VirtualObjectSelectionViewController: UITableViewController {
         preferredContentSize = CGSize(width: tableView.contentSize.width, height: tableView.contentSize.height)
     }
     
+    /// - Tag: ObjectSelection
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let object = virtualObjects[indexPath.row]
         object.modelQuantity += 1
