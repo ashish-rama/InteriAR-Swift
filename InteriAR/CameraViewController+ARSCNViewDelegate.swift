@@ -7,7 +7,7 @@
 
 import ARKit
 
-extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
+extension CameraViewController: ARSCNViewDelegate, ARSessionDelegate {
     
     // MARK: - ARSCNViewDelegate
     

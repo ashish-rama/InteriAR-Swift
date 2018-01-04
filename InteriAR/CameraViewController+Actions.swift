@@ -11,7 +11,7 @@
 import UIKit
 import SceneKit
 
-extension ViewController: UIGestureRecognizerDelegate {
+extension CameraViewController: UIGestureRecognizerDelegate {
     
     enum SegueIdentifier: String {
         case showObjects
@@ -68,7 +68,7 @@ extension ViewController: UIGestureRecognizerDelegate {
     }
 }
 
-extension ViewController: UIPopoverPresentationControllerDelegate {
+extension CameraViewController: UIPopoverPresentationControllerDelegate {
     
     // MARK: - UIPopoverPresentationControllerDelegate
 

@@ -25,6 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 determine whether to show UI for launching AR experiences.
             """) // For details, see https://developer.apple.com/documentation/arkit
         }
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        // Start application with a blank RootViewController
+        let rootViewController = RootViewController()
+        window!.rootViewController = rootViewController
+        window!.makeKeyAndVisible()
+                
         return true
     }
 

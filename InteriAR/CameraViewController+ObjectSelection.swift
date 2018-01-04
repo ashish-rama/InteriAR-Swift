@@ -8,7 +8,7 @@
 import UIKit
 import SceneKit
 
-extension ViewController: VirtualObjectSelectionViewControllerDelegate {
+extension CameraViewController: VirtualObjectSelectionViewControllerDelegate {
     /**
      Adds the specified virtual object to the scene, placed using
      the focus square's estimate of the world-space position

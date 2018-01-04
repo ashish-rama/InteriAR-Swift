@@ -14,8 +14,18 @@ class SaveCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
 }
 
+// Protocol for SaveTableViewController Delegate
+protocol SaveTableViewControllerDelegate: class {
+    func toggleMenu()
+}
 
 class SaveTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+    
+    var delegate: SaveTableViewControllerDelegate?
+    
+    @IBAction func menuButtonPressed(_ sender: Any) {
+        delegate?.toggleMenu()
+    }
     
     var layouts: [NSManagedObject] = []
     

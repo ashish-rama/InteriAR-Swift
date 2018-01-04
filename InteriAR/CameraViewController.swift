@@ -12,7 +12,12 @@ import SceneKit
 import UIKit
 import CoreData
 
-class ViewController: UIViewController {
+// Protocol for CameraViewController Delegate
+protocol CameraViewControllerDelegate: class {
+    func toggleMenu()
+}
+
+class CameraViewController: UIViewController {
     
     // MARK: IBOutlets
     
@@ -31,12 +36,20 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var settingViewButtom: UIButton!
     
-    @IBOutlet weak var saveLayoutButton: UIButton!
+    // Delegate for menu button pressing
+    var delegate: CameraViewControllerDelegate?
+    
+    // Menu button pressed
+    @IBAction func menuButtonPressed(_ sender: Any) {
+        delegate?.toggleMenu()
+    }
     
     // Save button pressed
     @IBAction func saveLayoutPressed(_ sender: Any) {
         showInputDialog()
     }
+    
+    
     
     // show the input alert containing name input box
     func showInputDialog() {
@@ -209,6 +222,8 @@ class ViewController: UIViewController {
         // Set the delegate to ensure this gesture is only used when there are no virtual objects in the scene.
         tapGesture.delegate = self
         sceneView.addGestureRecognizer(tapGesture)
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -269,7 +284,6 @@ class ViewController: UIViewController {
             addObjectButton.isHidden = true
             detailViewButton.isHidden = true
             settingViewButtom.isHidden = true
-            saveLayoutButton.isHidden = true
             return
         }
         
@@ -287,7 +301,6 @@ class ViewController: UIViewController {
         addObjectButton.isHidden = false
         detailViewButton.isHidden = false
         settingViewButtom.isHidden = false
-        saveLayoutButton.isHidden = false
         statusViewController.cancelScheduledMessage(for: .focusSquare)
     }
     
